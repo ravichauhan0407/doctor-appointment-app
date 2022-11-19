@@ -15,6 +15,26 @@ const userSchema=mongoose.Schema({
           type:String,
           required:true
       },
+      isadmin:
+      {
+           type:Boolean,
+           default:false
+      },
+      isdoctor:
+      {
+           type:Boolean,
+           default:false
+      },
+      seennotifications:
+      {
+           type:Array,
+           default:[]
+      },
+      unseennotification:
+      {
+          type:Array,
+          default:[]
+      }
 },
 {
     timestamps:true

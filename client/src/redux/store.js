@@ -3,9 +3,11 @@ import {configureStore}  from '@reduxjs/toolkit'
 import {combineReducers}  from 'redux'
 
 import  {alertSlice}  from './alertsReducer'
+import { userSlice } from './userReducer'
 
 const rootReducer=combineReducers({
-     alerts:alertSlice.reducer
+     alerts:alertSlice.reducer,
+     user:userSlice.reducer
 })
 
 const store=configureStore({

@@ -9,7 +9,7 @@ app.use('/api/user',userRoutes)
 
 app.use((req,res)=>
 {
-     console.log('error')
+     console.log('ROUTE DOES NOT FOUND')
 })
 
 

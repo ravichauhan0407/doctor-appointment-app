@@ -72,3 +72,17 @@ code {
      position: fixed;
 
 }
+
+.apply-button
+{
+    background-color: #005555 !important;
+    color: white !important;
+    text-align: center !important;
+    width: 10vw !important;
+}
+
+.align-end
+{
+    display: flex;
+    justify-content: end;
+}

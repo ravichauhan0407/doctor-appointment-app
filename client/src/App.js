@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { useSelector } from 'react-redux';
 import { PublicRoute } from './components/PublicRoute';
 import { PrivateRoute } from './components/PrivateRoute';
+import { ApplyDoctor } from './pages/ApplyDoctor';
 function App() {
 
   const {loading}=useSelector((state)=>state.alerts)
@@ -23,6 +24,7 @@ function App() {
               <Route path='/login' element={<PublicRoute><Login/></PublicRoute>}></Route>
               <Route path='/register' element={<PublicRoute><Register/></PublicRoute>}></Route>
               <Route path='/' element={<PrivateRoute><Home/></PrivateRoute>}></Route>
+              <Route path='/apply-doctor' element={<PrivateRoute><ApplyDoctor/></PrivateRoute>}></Route>
          </Routes>
      </BrowserRouter>
      </>

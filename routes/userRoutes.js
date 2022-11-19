@@ -3,7 +3,7 @@ const express=require('express')
 const User=require('../models/userModel.js')
 const becrypt=require('bcryptjs')
 const router=express.Router()
-
+const Doctor=require('../models/doctorModels')
 const jwt=require('jsonwebtoken')
 
 const authMiddleware=require('../middlewares/authmiddleware.js')
@@ -82,12 +82,10 @@ router.get('/get-user-info-by-id',authMiddleware,async (req,res)=>
                return res.status(200).send({message:"User doesn't exist",success:false})
          }
 
+         
+         user.password=undefined
          res.status(200).send({success:true,
-            data:
-            {
-                 name:user.name,
-                 email:user.email
-            }
+            data:user
         })
          
    }
@@ -95,5 +93,45 @@ router.get('/get-user-info-by-id',authMiddleware,async (req,res)=>
    {
          res.status(500).send({message:"Error getting User Info",success:false})
    }
+})
+
+
+
+router.post('/apply-for-doctor',authMiddleware,async(req,res)=>
+{
+     try
+     {
+          const newdoctor=new Doctor({...req.body,status:'pending',userid:req.userId})
+          
+            const admin=await User.findOne({isadmin:true})
+
+          if(!admin)
+          {
+               return res.status(200).send({message:"Not accepting Application Anymore",success:false})
+          }
+          await newdoctor.save()
+         const unseennotification=admin.unseennotification;
+         unseennotification.push(
+            {
+                type:"new-doctor-request",
+                message:`${req.body.firstname} is applied for doctor`,
+                data:
+                {
+                    doctorId:newdoctor._id,
+                    name:newdoctor.firstname+" "+newdoctor.lastname
+                }
+            })
+        
+       await   User.findByIdAndUpdate(admin._id,{unseennotification})
+       
+       res.status(200).send({success:true})
+
+     }
+     catch(error)
+     {
+         res.status(500).send({message:"Something went wrong",success:false})
+     }
+
+
 })
 module.exports=router

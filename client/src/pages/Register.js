@@ -2,9 +2,10 @@ import { Button, Form, Input } from 'antd';
 import React from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 export const Register = () => {
-
+ 
+   const navigate=useNavigate()
    const onFinish=async (content)=>
    {
        try
@@ -14,6 +15,8 @@ export const Register = () => {
             if(response.data.success)
             {
                 toast.success(response.data.message)
+                navigate('/login')
+
             }
             else
             {
