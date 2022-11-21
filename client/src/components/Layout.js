@@ -28,12 +28,12 @@ export const Layout = (props) => {
     },
     {
        name:"Users",
-       path:"/users",
+       path:"/users-list",
        icon:"ri-user-line"
     },
     {
       name:"Doctors",
-      path:"/doctors",
+      path:"/doctors-list",
       icon:"ri-hospital-line"
    }
     ,
@@ -111,7 +111,7 @@ export const Layout = (props) => {
           <div className="profile">{user?user.name:'user'}</div></Col>
           <Col>
           <Badge count={user?user.unseennotification.length:0} overflowCount={5}>
-          <i class="ri-notification-2-line close-menu"></i>
+          <i class="ri-notification-2-line close-menu"  onClick={()=>{navigate('/notification')}}></i>
           </Badge>
           </Col>
           </Row>

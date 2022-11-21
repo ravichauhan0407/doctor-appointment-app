@@ -134,4 +134,36 @@ router.post('/apply-for-doctor',authMiddleware,async(req,res)=>
 
 
 })
+router.get('/get-all-user',authMiddleware,async(req,res)=>
+{
+     try
+     {
+          const user=await User.find({isadmin:false})
+
+          res.status(200).send({success:true,data:user})
+
+     }
+     catch(error)
+     {
+         res.status(500).send({message:"Something went wrong",success:false})
+     }
+
+
+})
+router.get('/get-all-doctor',authMiddleware,async(req,res)=>
+{
+     try
+     {
+          const user=await Doctor.find({})
+
+          res.status(200).send({success:true,data:user})
+
+     }
+     catch(error)
+     {
+         res.status(500).send({message:"Something went wrong",success:false})
+     }
+
+
+})
 module.exports=router

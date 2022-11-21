@@ -86,3 +86,8 @@ code {
     display: flex;
     justify-content: end;
 }
+
+.cursor-pointer
+{
+    cursor: pointer;
+}

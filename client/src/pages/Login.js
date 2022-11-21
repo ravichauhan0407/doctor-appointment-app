@@ -9,7 +9,6 @@ export const Login = () => {
    const onFinish=async(content)=>
    {
          const  response=await axios.post('/api/user/login',content)
-        
 
          if(response.data.success)
          {

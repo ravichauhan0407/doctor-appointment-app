@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../components/Layout";
 import axios from 'axios'
-import { Form, Row, Col ,Input, Button} from "antd";
+import { Form, Row, Col ,Input, Button,TimePicker} from "antd";
 import { useDispatch } from "react-redux";
 import {showLoading,hideLoading} from '../redux/alertsReducer'
 import { useNavigate } from "react-router-dom";
@@ -12,33 +12,34 @@ export const ApplyDoctor = () => {
   const navigate=useNavigate()
   const onfinish=async(content)=>
   {
-      try
-      {
-        dispatch(showLoading())
+     console.log(content)
+      // try
+      // {
+      //   dispatch(showLoading())
 
-        const response=await axios.post('api/user/apply-for-doctor',content,{
-            headers:
-            {
-                 Authorization:'Bearer '+localStorage.getItem("token")
-            }
-        })
+      //   const response=await axios.post('api/user/apply-for-doctor',content,{
+      //       headers:
+      //       {
+      //            Authorization:'Bearer '+localStorage.getItem("token")
+      //       }
+      //   })
 
-        dispatch(hideLoading())
+      //   dispatch(hideLoading())
         
-        if(!response.data.success)
-        {
-             toast.success(response.data.message) 
-             navigate('/')
-        }
-        else
-        {
-             navigate('/')
-        }
-      }
-      catch(error)
-      {
-        toast.error(error) 
-      }
+      //   if(!response.data.success)
+      //   {
+      //        toast.success(response.data.message) 
+      //        navigate('/')
+      //   }
+      //   else
+      //   {
+      //        navigate('/')
+      //   }
+      // }
+      // catch(error)
+      // {
+      //   toast.error(error) 
+      // }
   }
 
 
@@ -133,7 +134,7 @@ export const ApplyDoctor = () => {
               name="consultinghours"
               rules={[{ required: true, message: "Field cannot be Empty" }]}
             >
-              <Input />
+              <TimePicker.RangePicker />
             </Form.Item>
           </Col>
           <Col span={8} xs={24} sm={24} lg={8}>
